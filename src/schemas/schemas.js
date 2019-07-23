@@ -4,6 +4,10 @@ import {
     typeDefs as userAccountSchema,
     resolvers as userAccountResolver
 } from './users/user_schema';
+import {
+    typeDefs as qrCodeSchema,
+    resolvers as qrCodeResolver
+} from './qrCodes/qrCodeSchema';
 
 const Query = gql`
     type Query {
@@ -18,6 +22,7 @@ const Mutation = gql`
 export const schema = makeExecutableSchema({
     typeDefs: [Query,
         Mutation,
-        userAccountSchema],
-    resolvers: [userAccountResolver]
+        userAccountSchema,
+        qrCodeSchema],
+    resolvers: [userAccountResolver,qrCodeResolver]
 })

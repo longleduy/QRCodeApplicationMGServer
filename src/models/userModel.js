@@ -10,6 +10,7 @@ const userSchema = mongoose.Schema({
     avatar: { type: String },
     createTime: {type: Date, default: Date.now},
     status: { type: String },
-    socialKey: { type: String }
+    socialKey: { type: String },
+    role: { type: String },
 })
 export const userModel = mongoose.model('user_infos',userSchema);
