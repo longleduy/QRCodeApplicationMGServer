@@ -54,6 +54,7 @@ export const signIn = async (signData, req) => {
                     dateOfBirth: result.dateOfBirth,
                     role: result.role
                 }
+                console.log(payload)
                 req.session.user = payload;
                 const jwt = genJWT(payload, process.env.SECRET_KEY, '1d');
                 return signInRespone(true, null, jwt);
