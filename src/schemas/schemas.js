@@ -9,6 +9,11 @@ import {
     resolvers as qrCodeResolver
 } from './qrCodes/qrCodeSchema';
 
+import {
+    typeDefs as logSchema,
+    resolvers as logResolver
+} from './logs/logSchema';
+
 const Query = gql`
     type Query {
         _empty: String
@@ -23,6 +28,7 @@ export const schema = makeExecutableSchema({
     typeDefs: [Query,
         Mutation,
         userAccountSchema,
-        qrCodeSchema],
-    resolvers: [userAccountResolver,qrCodeResolver]
+        qrCodeSchema,
+        logSchema],
+    resolvers: [userAccountResolver,qrCodeResolver,logResolver]
 })

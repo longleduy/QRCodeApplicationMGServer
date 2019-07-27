@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 
 const qrCodeSchema = mongoose.Schema({
+    maNV: {type: mongoose.Schema.Types.ObjectId, ref:'user_infos'},
     roleMaSx: {type: String, required:true},
     maDonHang:{type: String},
     maSanPham:{type: String},

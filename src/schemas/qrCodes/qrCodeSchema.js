@@ -24,6 +24,16 @@ export const typeDefs = gql`
         maQRCode: String!
         createTime: String!
     }
+    type QRCodeInfo2{
+        qrCodeID: String!
+        roleMaSx: String!
+        maDonHang: String
+        maSanPham: String
+        maBarCode: String!
+        maQRCode: String!
+        createTime: String!
+        nhanVien: UserInfo
+    }
     union DorSResult = MaSanPham | MaDonHang
     type MaDonHang{
         maDonHang: String
@@ -34,7 +44,7 @@ export const typeDefs = gql`
     extend type Query {
         filterQRCode(filterKey: String): [QRCodeInfo]
         filterDorS(filterKey: String): [DorSResult]
-        getQRCodeInfo(qrCodeID: String):QRCodeInfo
+        getQRCodeInfo(qrCodeID: String):QRCodeInfo2
     }
     extend type Mutation {
         taoLenhSx(lenhSxData: lenhSxData): DefaultRespone
@@ -68,6 +78,21 @@ export const resolvers = {
         createTime: async ({ createTime }) => {
             return convertPostTime(createTime);
         },
+    },
+    QRCodeInfo2:{
+        qrCodeID: async ({ id }) => {
+            return id;
+        },
+        createTime: async ({ createTime }) => {
+            return convertPostTime(createTime);
+        },
+        nhanVien: async ({ maNV }) => {
+            return {
+                userID: maNV._id,
+                profileName:maNV.profileName,
+                avatar:maNV.avatar
+            }
+        }
     },
     DorSResult: {
         __resolveType(obj){

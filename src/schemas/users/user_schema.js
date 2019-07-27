@@ -24,6 +24,11 @@ export const typeDefs = gql`
         gender: String!,
         dateOfBirth: String!
     }
+    type UserInfo{
+        userID: String!
+        profileName: String!
+        avatar: String
+    }
     type SignInRespone{
         isSuccess: Boolean!
         message: String
