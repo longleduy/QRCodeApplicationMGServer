@@ -14,6 +14,10 @@ export const typeDefs = gql`
         filterNV: String
         filterTime: String
     }
+    input logData{
+        maQRCode: String!
+        nlActive: [String]
+    }
     type LogInFo{
         logID: String!
         loaiLog: String!
@@ -28,7 +32,7 @@ export const typeDefs = gql`
         getLogInfo(logID: String):LogInFo
     }
     extend type Mutation {
-        createLog(maQRCode: String!):LogInFo
+        createLog(logData: logData):LogInFo
     }
 `;
 export const resolvers = {
@@ -43,8 +47,8 @@ export const resolvers = {
         },
     },
     Mutation: {
-        createLog: async (obj, { maQRCode }, {req}) => {
-            let result = await createLog(maQRCode,req);
+        createLog: async (obj, { logData }, {req}) => {
+            let result = await createLog(logData,req);
             return result
         },
     },

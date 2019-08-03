@@ -13,7 +13,7 @@ import { schema } from './schemas/schemas';
 //Todo: ENV
 const connectApolloServer = async () => {
   const configurations = {
-    production: { ssl: false, port: `${process.env.PORT}`, hostname: `${process.env.HOST_NAME_DEV}` },
+    production: { ssl: false, port: `${process.env.PORT}`, hostname: `${process.env.HOST_NAME_PROD}` },
     development: { ssl: false, port: `${process.env.PORT}`, hostname: `${process.env.HOST_NAME_DEV}` }
   }
   const environment = process.env.NODE_ENV || 'development'

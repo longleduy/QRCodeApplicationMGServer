@@ -5,8 +5,14 @@ import { ERROR } from '../../utils/constains/mainContain';
 
 //Todo: Tao lenh Sx 
 export const taoLenhSx = async ({ roleMaSx, maDonHang, maSanPham, maBarCode, maQRCode },req) => {
-    let maNV = req.session.user.userID;
-    let tenNV = req.session.user.profileName;
+    let maNV;
+    let tenNV;
+    try {
+        maNV = req.session.user.userID;
+        tenNV = req.session.user.profileName;
+    } catch (error) {
+        throw new Error('SESSION DENIE');
+    }
     const qrCodeInfo = new qrCodeModel({
         maNV,
         tenNV,

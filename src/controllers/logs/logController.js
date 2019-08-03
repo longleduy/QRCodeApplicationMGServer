@@ -22,26 +22,32 @@ export const getLogInfo = async (logID) => {
     return result;
 }
 
-export const createLog = async (maQRCode,req) => {
-    let maNV = req.session.user.userID;
-    let tenNV = req.session.user.profileName;
+export const createLog = async ({maQRCode,nlActive},req) => {
+    let maNV;
+    let tenNV;
+    try {
+        maNV = req.session.user.userID;
+        tenNV = req.session.user.profileName;
+    } catch (error) {
+        throw new Error('SESSION DENIE');
+    }
     const arrQrCode = maQRCode.split('_');
     const loaiLog = 'SCAN_QRCODE';
     const maBarCode = arrQrCode[3];
     let maVatLieu = '';
-    arrQrCode.forEach((item,idx) => {
-        if(idx > 3 && idx < arrQrCode.length -1){
-            maVatLieu +=item+"_"
+    nlActive.forEach((item,idx) => {
+        if(idx < nlActive.length-1){
+            maVatLieu +=item+", "
         }
-        else if(idx === arrQrCode.length -1){
-            maVatLieu +=item
+        else if(idx === nlActive.length -1){
+            maVatLieu +=item+"."
         }
     })
     const newLog = new logInfoModel({
         maNV,
         tenNV,
         loaiLog,
-        logContent: "Scan thanh cong nguyen vat lieu: "+maVatLieu,
+        logContent: "Quét thành công: "+maVatLieu,
         maBarCode,
         maQRCode
     })
